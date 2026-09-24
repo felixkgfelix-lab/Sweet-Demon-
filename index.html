@@ -179,7 +179,7 @@
 
     @keyframes heartFade {
       0% {
-        transform: translateY(0) scale(0.5);
+        transform: translateY(0) scale(0.5) rotate(-8deg);
         opacity: 0;
       }
       15% { opacity: 1; }
@@ -213,7 +213,7 @@
   </div>
 
   <script>
-    const text = "давай мы останемся тогда как настоящие друзья... алло, привет, как дела? всё равно ничего не изменится";
+    const text = "давай мы останемся тогда как настоящие друзья... алло, привет, как дела? всё равно ничего не изменится...";
     const typedText = document.getElementById("typedText");
     let index = 0;
 
@@ -241,7 +241,7 @@
     function createHeart() {
       const heart = document.createElement("div");
       heart.className = "mini-heart";
-      heart.textContent = Math.random() > 0.5 ? "❤️" : "💗";
+      heart.textContent = "💔";
       heart.style.left = `${Math.random() * 100}vw`;
       heart.style.top = `${Math.random() * 70 + 25}vh`;
       heart.style.fontSize = `${10 + Math.random() * 14}px`;
