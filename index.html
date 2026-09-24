@@ -12,8 +12,6 @@
       --card: rgba(255, 255, 255, 0.7);
       --text: #5f2c3a;
       --accent: #ec6d96;
-      --accent-2: #f7b6c8;
-      --line: rgba(255, 255, 255, 0.6);
     }
 
     * { box-sizing: border-box; }
@@ -102,6 +100,36 @@
       animation: showFooter 1.2s ease 3.5s forwards;
     }
 
+    .music-player {
+      position: fixed;
+      right: 22px;
+      bottom: 22px;
+      z-index: 20;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      max-width: calc(100vw - 44px);
+      padding: 10px 14px;
+      border: 1px solid rgba(255,255,255,0.65);
+      border-radius: 18px;
+      background: rgba(255,255,255,0.72);
+      box-shadow: 0 12px 28px rgba(158, 74, 102, 0.22);
+      backdrop-filter: blur(10px);
+    }
+
+    .music-title {
+      font-size: 12px;
+      font-weight: 700;
+      white-space: nowrap;
+      color: var(--text);
+    }
+
+    audio {
+      width: min(240px, 42vw);
+      height: 34px;
+      accent-color: var(--accent);
+    }
+
     .petal,
     .mini-heart,
     .rain-drop {
@@ -166,40 +194,32 @@
     }
 
     @keyframes fall {
-      0% {
-        transform: translate3d(0, -20px, 0) rotate(0deg) scale(0.8);
-        opacity: 0;
-      }
+      0% { transform: translate3d(0, -20px, 0) rotate(0deg) scale(0.8); opacity: 0; }
       15% { opacity: 0.9; }
-      100% {
-        transform: translate3d(var(--drift, 30px), 110vh, 0) rotate(360deg) scale(1.1);
-        opacity: 0;
-      }
+      100% { transform: translate3d(var(--drift, 30px), 110vh, 0) rotate(360deg) scale(1.1); opacity: 0; }
     }
 
     @keyframes heartFade {
-      0% {
-        transform: translateY(0) scale(0.5) rotate(-8deg);
-        opacity: 0;
-      }
+      0% { transform: translateY(0) scale(0.5) rotate(-8deg); opacity: 0; }
       15% { opacity: 1; }
       60% { opacity: 1; }
-      100% {
-        transform: translateY(-100px) scale(1.5) rotate(15deg);
-        opacity: 0;
-      }
+      100% { transform: translateY(-100px) scale(1.5) rotate(15deg); opacity: 0; }
     }
 
     @keyframes rainFall {
-      0% {
-        transform: translateY(-30px) scaleY(0.8);
-        opacity: 0;
-      }
+      0% { transform: translateY(-30px) scaleY(0.8); opacity: 0; }
       20% { opacity: 0.5; }
-      100% {
-        transform: translateY(110vh) scaleY(1.2);
-        opacity: 0;
+      100% { transform: translateY(110vh) scaleY(1.2); opacity: 0; }
+    }
+
+    @media (max-width: 560px) {
+      .music-player {
+        left: 50%;
+        right: auto;
+        transform: translateX(-50%);
       }
+      .music-title { display: none; }
+      audio { width: min(280px, 72vw); }
     }
   </style>
 </head>
@@ -212,8 +232,17 @@
     <div class="footer">давай оставим всё как есть — и всё равно будем друзьями</div>
   </div>
 
+  <div class="music-player" aria-label="Музыкальный проигрыватель">
+    <span class="music-title">Stray Kids — Falling Up</span>
+    <!-- Положите легально приобретённый файл в audio/falling-up.mp3 -->
+    <audio controls preload="metadata">
+      <source src="audio/falling-up.mp3" type="audio/mpeg" />
+      Ваш браузер не поддерживает аудио.
+    </audio>
+  </div>
+
   <script>
-    const text = "давай мы останемся тогда как настоящие друзья... алло, привет, как дела? всё равно ничего не изменится...";
+    const text = "давай мы останемся тогда как настоящие друзья... алло, привет, как дела? всё равно ничего не изменится";
     const typedText = document.getElementById("typedText");
     let index = 0;
 
