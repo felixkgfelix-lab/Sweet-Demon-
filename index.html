@@ -16,7 +16,7 @@
 </head>
 <body>
   <div class="card"><div class="badge">кстати</div><div class="text"><span class="typed" id="typedText"></span><span class="cursor"></span></div><div class="footer">давай оставим всё как есть — и всё равно будем друзьями</div></div>
-  <div class="music-player" aria-label="Музыкальный проигрыватель"><span class="music-title">Stray Kids — Falling Up</span><button class="audio-button" id="audioButton" type="button">▶ Включить</button><audio id="backgroundAudio" autoplay loop muted preload="auto"><source src="audio/falling-up.mp3" type="audio/mpeg">Ваш браузер не поддерживает аудио.</audio></div>
+  <div class="music-player" aria-label="Музыкальный проигрыватель"><span class="music-title">Stray Kids — Falling Up</span><button class="audio-button" id="audioButton" type="button">▶ Включить</button><audio id="backgroundAudio" autoplay loop muted preload="auto"><source src="./falling-up.mp3.mp3" type="audio/mpeg"><source src="./audio/falling-up.mp3" type="audio/mpeg">Ваш браузер не поддерживает аудио.</audio></div>
   <script>
     const text="давай мы останемся тогда как настоящие друзья... алло, привет, как дела? всё равно ничего не изменится";
     const typedText=document.getElementById("typedText");let index=0;
@@ -28,9 +28,20 @@
 
     const audio=document.getElementById("backgroundAudio");const button=document.getElementById("audioButton");
     function updateButton(){button.textContent=audio.paused?"▶ Включить":"⏸ Пауза"}
-    async function startAudio(){try{audio.muted=false;await audio.play();updateButton()}catch(error){button.textContent="▶ Нажмите для музыки"}}
-    // Браузеры блокируют автозапуск звука без действия пользователя. Сначала пробуем autoplay без звука.
-    audio.play().catch(()=>{});document.addEventListener("pointerdown",startAudio,{once:true});button.addEventListener("click",startAudio);audio.addEventListener("pause",updateButton);audio.addEventListener("play",updateButton);
+    async function startAudio(){
+      try {
+        audio.muted=false;
+        await audio.play();
+        updateButton();
+      } catch (error) {
+        button.textContent="▶ Нажмите для музыки";
+      }
+    }
+    audio.play().catch(()=>{});
+    document.addEventListener("pointerdown",startAudio,{once:true});
+    button.addEventListener("click",startAudio);
+    audio.addEventListener("pause",updateButton);
+    audio.addEventListener("play",updateButton);
   </script>
 </body>
 </html>
